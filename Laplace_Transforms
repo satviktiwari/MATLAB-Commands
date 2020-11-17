@@ -1,0 +1,81 @@
+>> syms t s a
+>> laplace(exp(-a*t))
+ 
+ans =
+ 
+1/(a + s)
+ 
+>> syms y x a
+>> f=exp(-a*y)
+ 
+f =
+ 
+exp(-a*y)
+ 
+>> laplace(f,y,x)
+ 
+ans =
+ 
+1/(a + x)
+ 
+>> syms s t b w n
+>> laplace(t + t^(1/4) + t^(9/2) + exp(-b*t) + sin(w*t) - cos(n*t)
+ laplace(t + t^(1/4) + t^(9/2) + exp(-b*t) + sin(w*t) - cos(n*t)
+                                                                ↑
+Error: Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise, check for mismatched delimiters.
+ 
+Did you mean:
+>> laplace(t + t^(1/4) + t^(9/2) + exp(-b*t) + sin(w*t) - cos(n*t))
+ 
+ans =
+ 
+w/(s^2 + w^2) - s/(n^2 + s^2) + 1/(b + s) + 1/s^2 + (945*pi^(1/2))/(32*s^(11/2)) + (pi*2^(1/2))/(4*s^(5/4)*gamma(3/4))
+ 
+>> syms t a w n s
+>> laplace(t*exp(-a*t) + (cos(w*t)-cos(n*t))/t + t*sin(n*t), t, s)
+ 
+ans =
+ 
+log(n^2/s^2 + 1)/2 - log(w^2/s^2 + 1)/2 + 1/(a + s)^2 + (2*n*s)/(n^2 + s^2)^2
+ 
+>> syms t s
+>> laplace(dirac(t-3) + heaviside(t-pi), t, s)
+ 
+ans =
+ 
+exp(-3*s) + exp(-pi*s)/s
+ 
+>> syms t s
+>> f = (exp(t-2) + sin(t-2))*(heaviside(t-2))
+ 
+f =
+ 
+heaviside(t - 2)*(exp(t - 2) + sin(t - 2))
+ 
+>> laplace(f, t, s)
+ 
+ans =
+ 
+exp(-2*s)*(1/(s - 1) + 1/(s^2 + 1))
+ 
+>> syms t s
+>> I = int(exp(-t)*sin(t)*cos(t),0,t)
+ 
+I =
+ 
+1/5 - (exp(-t)*(2*cos(2*t) + sin(2*t)))/10
+ 
+>> simplify(laplace(I, t, s))
+ 
+ans =
+ 
+1/(s*(s^2 + 2*s + 5))
+ 
+>> syms f(t) s
+>> Df = diff(f(t) , t);
+>> laplace(Df, t, s)
+ 
+ans =
+ 
+s*laplace(f(t), t, s) - f(0)
+
