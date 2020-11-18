@@ -1,0 +1,80 @@
+>> syms s
+>> F = 1/(s^2);
+>> ilaplace(F)
+ 
+ans =
+ 
+t
+ 
+>> syms a s
+>> F = 1/(s-a)^2;
+
+>> ilaplace(F)
+ 
+ans =
+ 
+t*exp(a*t)
+ 
+>> syms x
+>>  ilaplace(F, x)
+ 
+ans =
+ 
+x*exp(a*x)
+ 
+>> syms x
+>> ilaplace(F, a, x)
+ 
+ans =
+ 
+x*exp(s*x)
+ 
+>> syms s w n
+>> a = ilaplace(s/(s^2 + 4))
+ 
+a =
+ 
+cos(2*t)
+ 
+>> b = ilaplace(w/(s^2 + w^2))
+ 
+b =
+ 
+sin(t*w)
+ 
+>> c = ilaplace(s/(s^2 - n^2))
+ 
+c =
+ 
+exp(n*t)/2 + exp(-n*t)/2
+ 
+>> answer = a+b+c
+ 
+answer =
+ 
+cos(2*t) + exp(n*t)/2 + exp(-n*t)/2 + sin(t*w)
+ 
+>> syms s t
+>> f = 1+exp(-2*s)/(s^2+1) + atan(1/s)
+ 
+f =
+ 
+atan(1/s) + exp(-2*s)/(s^2 + 1) + 1
+ 
+>> syms s t
+f = 1+exp(-2*s)/(s^2+1) + atan(1/s);
+>> ilaplace(f, s, t)
+ 
+ans =
+ 
+dirac(t) + sin(t)/t + heaviside(t - 2)*sin(t - 2)
+ 
+>> syms s t a b c
+f = 1+exp(-2*s)/(s^2+1) + atan(1/s);
+ilaplace(f, s, t)
+ 
+
+ 
+ans =
+ 
+dirac(t) + sin(t)/t + heaviside(t - 2)*sin(t - 2)
