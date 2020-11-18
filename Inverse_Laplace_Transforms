@@ -78,3 +78,43 @@ ilaplace(f, s, t)
 ans =
  
 dirac(t) + sin(t)/t + heaviside(t - 2)*sin(t - 2)
+
+// Differential equations using LT
+
+>> syms s t y
+>> f = 4*exp(2*t)
+ 
+f =
+ 
+4*exp(2*t)
+ 
+>> F = laplace(f, t, s)
+ 
+F =
+ 
+4/(s - 2)
+ 
+>> y1 = s*y + 3
+ 
+y1 =
+ 
+s*y + 3
+ 
+>> y2 = s*y1 - 5
+ 
+y2 =
+ 
+s*(s*y + 3) - 5
+ 
+>> sol = solve(y2 - 3*y1 + 2*y - F, y)
+ 
+sol =
+ 
+(4/(s - 2) - 3*s + 14)/(s^2 - 3*s + 2)
+ 
+>> solv = ilaplace(sol, s, t)
+ 
+solv =
+ 
+4*exp(2*t) - 7*exp(t) + 4*t*exp(2*t)
+ 
